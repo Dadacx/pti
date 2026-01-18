@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xml" href="widok.xsl"?>
+<!DOCTYPE sklep [
+    <!ELEMENT sklep (klienci, towary, zakupy)>
+    
+    <!ELEMENT klienci (klient+)>
+    <!ELEMENT klient (imie, nazwisko, miasto)>
+    <!ATTLIST klient id ID #REQUIRED>
+    <!ELEMENT imie (#PCDATA)>
+    <!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT miasto (#PCDATA)>
+
+    <!ELEMENT towary (towar+)>
+    <!ELEMENT towar (nazwa, cena)>
+    <!ATTLIST towar id ID #REQUIRED>
+    <!ELEMENT nazwa (#PCDATA)>
+    <!ELEMENT cena (#PCDATA)>
+
+    <!ELEMENT zakupy (zakup+)>
+    <!ELEMENT zakup (ilosc, data)>
+    <!ATTLIST zakup id_z ID #REQUIRED>
+    <!ATTLIST zakup klient_ref IDREF #REQUIRED>
+    <!ATTLIST zakup towar_ref IDREF #REQUIRED>
+    <!ELEMENT ilosc (#PCDATA)>
+    <!ELEMENT data (#PCDATA)>
+]>
+<sklep>
+    <klienci>
+        <klient id="K1">
+            <imie>Jan</imie>
+            <nazwisko>Kowalski</nazwisko>
+            <miasto>Kielce</miasto>
+        </klient>
+        <klient id="K2">
+            <imie>Anna</imie>
+            <nazwisko>Nowak</nazwisko>
+            <miasto>Warszawa</miasto>
+        </klient>
+        <klient id="K3">
+            <imie>Piotr</imie>
+            <nazwisko>Wiśniewski</nazwisko>
+            <miasto>Kraków</miasto>
+        </klient>
+    </klienci>
+
+    <towary>
+        <towar id="T1">
+            <nazwa>Laptop</nazwa>
+            <cena>3500</cena>
+        </towar>
+        <towar id="T2">
+            <nazwa>Myszka</nazwa>
+            <cena>50</cena>
+        </towar>
+        <towar id="T3">
+            <nazwa>Klawiatura</nazwa>
+            <cena>150</cena>
+        </towar>
+    </towary>
+
+    <zakupy>
+        <zakup id_z="Z1" klient_ref="K1" towar_ref="T1">
+            <ilosc>1</ilosc>
+            <data>2025-10-12</data>
+        </zakup>
+        <zakup id_z="Z2" klient_ref="K1" towar_ref="T2">
+            <ilosc>2</ilosc>
+            <data>2025-10-12</data>
+        </zakup>
+        <zakup id_z="Z3" klient_ref="K2" towar_ref="T1">
+            <ilosc>1</ilosc>
+            <data>2025-11-01</data>
+        </zakup>
+        <zakup id_z="Z4" klient_ref="K3" towar_ref="T3">
+            <ilosc>5</ilosc>
+            <data>2025-11-05</data>
+        </zakup>
+    </zakupy>
+</sklep>

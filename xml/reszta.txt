@@ -1,0 +1,258 @@
+------ b. Student - ocena - przedmiot (uczelnia.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE uczelnia [
+    <!ELEMENT uczelnia (studenci, przedmioty, oceny)>
+    <!ELEMENT studenci (student+)>
+    <!ELEMENT student (imie, nazwisko, nr_indeksu)>
+    <!ATTLIST student id ID #REQUIRED>
+    <!ELEMENT imie (#PCDATA)>
+    <!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT nr_indeksu (#PCDATA)>
+    <!ELEMENT przedmioty (przedmiot+)>
+    <!ELEMENT przedmiot (nazwa, ects)>
+    <!ATTLIST przedmiot id ID #REQUIRED>
+    <!ELEMENT nazwa (#PCDATA)>
+    <!ELEMENT ects (#PCDATA)>
+    <!ELEMENT oceny (ocena+)>
+    <!ELEMENT ocena (wartosc, data)>
+    <!ATTLIST ocena id ID #REQUIRED>
+    <!ATTLIST ocena student_ref IDREF #REQUIRED>
+    <!ATTLIST ocena przedmiot_ref IDREF #REQUIRED>
+    <!ELEMENT wartosc (#PCDATA)>
+    <!ELEMENT data (#PCDATA)>
+]>
+<uczelnia>
+    <studenci>
+        <student id="S1"><imie>Adam</imie><nazwisko>Kot</nazwisko><nr_indeksu>1001</nr_indeksu></student>
+        <student id="S2"><imie>Ewa</imie><nazwisko>Lis</nazwisko><nr_indeksu>1002</nr_indeksu></student>
+    </studenci>
+    <przedmioty>
+        <przedmiot id="P1"><nazwa>Matematyka</nazwa><ects>6</ects></przedmiot>
+        <przedmiot id="P2"><nazwa>Fizyka</nazwa><ects>5</ects></przedmiot>
+    </przedmioty>
+    <oceny>
+        <ocena id="O1" student_ref="S1" przedmiot_ref="P1"><wartosc>4.0</wartosc><data>2025-01-20</data></ocena>
+        <ocena id="O2" student_ref="S2" przedmiot_ref="P2"><wartosc>3.5</wartosc><data>2025-01-21</data></ocena>
+    </oceny>
+</uczelnia>
+
+------ c. Czytelnik - książka (biblioteka.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE biblioteka [
+    <!ELEMENT biblioteka (czytelnicy, ksiazki, wypozyczenia)>
+    <!ELEMENT czytelnicy (czytelnik+)>
+    <!ELEMENT czytelnik (imie, nazwisko)>
+    <!ATTLIST czytelnik id ID #REQUIRED>
+    <!ELEMENT ksiazki (ksiazka+)>
+    <!ELEMENT ksiazka (tytul, autor)>
+    <!ATTLIST ksiazka id ID #REQUIRED>
+    <!ELEMENT wypozyczenia (wypozyczenie+)>
+    <!ELEMENT wypozyczenie (data_wyp, termin_zwrotu)>
+    <!ATTLIST wypozyczenie id ID #REQUIRED>
+    <!ATTLIST wypozyczenie czytelnik_ref IDREF #REQUIRED>
+    <!ATTLIST wypozyczenie ksiazka_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT tytul (#PCDATA)><!ELEMENT autor (#PCDATA)>
+    <!ELEMENT data_wyp (#PCDATA)><!ELEMENT termin_zwrotu (#PCDATA)>
+]>
+<biblioteka>
+    <czytelnicy>
+        <czytelnik id="C1"><imie>Jan</imie><nazwisko>Kowalski</nazwisko></czytelnik>
+    </czytelnicy>
+    <ksiazki>
+        <ksiazka id="K1"><tytul>Pan Tadeusz</tytul><autor>Adam Mickiewicz</autor></ksiazka>
+    </ksiazki>
+    <wypozyczenia>
+        <wypozyczenie id="W1" czytelnik_ref="C1" ksiazka_ref="K1">
+            <data_wyp>2025-01-10</data_wyp><termin_zwrotu>2025-02-10</termin_zwrotu>
+        </wypozyczenie>
+    </wypozyczenia>
+</biblioteka>
+
+------ d. Spektakl - rezerwacja (teatr.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE teatr [
+    <!ELEMENT teatr (widzowie, spektakle, rezerwacje)>
+    <!ELEMENT widzowie (widz+)>
+    <!ELEMENT widz (imie, nazwisko)>
+    <!ATTLIST widz id ID #REQUIRED>
+    <!ELEMENT spektakle (spektakl+)>
+    <!ELEMENT spektakl (tytul, data_seansu)>
+    <!ATTLIST spektakl id ID #REQUIRED>
+    <!ELEMENT rezerwacje (rezerwacja+)>
+    <!ELEMENT rezerwacja (rzad, miejsce)>
+    <!ATTLIST rezerwacja id ID #REQUIRED>
+    <!ATTLIST rezerwacja widz_ref IDREF #REQUIRED>
+    <!ATTLIST rezerwacja spektakl_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT tytul (#PCDATA)><!ELEMENT data_seansu (#PCDATA)>
+    <!ELEMENT rzad (#PCDATA)><!ELEMENT miejsce (#PCDATA)>
+]>
+<teatr>
+    <widzowie>
+        <widz id="W1"><imie>Anna</imie><nazwisko>Nowak</nazwisko></widz>
+    </widzowie>
+    <spektakle>
+        <spektakl id="S1"><tytul>Hamlet</tytul><data_seansu>2025-03-15</data_seansu></spektakl>
+    </spektakle>
+    <rezerwacje>
+        <rezerwacja id="R1" widz_ref="W1" spektakl_ref="S1"><rzad>5</rzad><miejsce>12</miejsce></rezerwacja>
+    </rezerwacje>
+</teatr>
+
+------ e. Pacjent - badanie (przychodnia.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE przychodnia [
+    <!ELEMENT przychodnia (pacjenci, lekarze, badania)>
+    <!ELEMENT pacjenci (pacjent+)>
+    <!ELEMENT pacjent (imie, nazwisko, pesel)>
+    <!ATTLIST pacjent id ID #REQUIRED>
+    <!ELEMENT lekarze (lekarz+)>
+    <!ELEMENT lekarz (imie, nazwisko, specjalnosc)>
+    <!ATTLIST lekarz id ID #REQUIRED>
+    <!ELEMENT badania (badanie+)>
+    <!ELEMENT badanie (opis, data)>
+    <!ATTLIST badanie id ID #REQUIRED>
+    <!ATTLIST badanie pacjent_ref IDREF #REQUIRED>
+    <!ATTLIST badanie lekarz_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT pesel (#PCDATA)><!ELEMENT specjalnosc (#PCDATA)>
+    <!ELEMENT opis (#PCDATA)><!ELEMENT data (#PCDATA)>
+]>
+<przychodnia>
+    <pacjenci>
+        <pacjent id="P1"><imie>Tomasz</imie><nazwisko>Bąk</nazwisko><pesel>90010112345</pesel></pacjent>
+    </pacjenci>
+    <lekarze>
+        <lekarz id="L1"><imie>Jan</imie><nazwisko>House</nazwisko><specjalnosc>Diagnosta</specjalnosc></lekarz>
+    </lekarze>
+    <badania>
+        <badanie id="B1" pacjent_ref="P1" lekarz_ref="L1"><opis>Morfologia</opis><data>2025-01-18</data></badanie>
+    </badania>
+</przychodnia>
+
+------ f. Wycieczka - rezerwacja (biuro.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE biuro [
+    <!ELEMENT biuro (uczestnicy, wycieczki, rezerwacje)>
+    <!ELEMENT uczestnicy (uczestnik+)>
+    <!ELEMENT uczestnik (imie, nazwisko)>
+    <!ATTLIST uczestnik id ID #REQUIRED>
+    <!ELEMENT wycieczki (wycieczka+)>
+    <!ELEMENT wycieczka (kraj, cena)>
+    <!ATTLIST wycieczka id ID #REQUIRED>
+    <!ELEMENT rezerwacje (rezerwacja+)>
+    <!ELEMENT rezerwacja (status, data_wplaty)>
+    <!ATTLIST rezerwacja id ID #REQUIRED>
+    <!ATTLIST rezerwacja uczestnik_ref IDREF #REQUIRED>
+    <!ATTLIST rezerwacja wycieczka_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT kraj (#PCDATA)><!ELEMENT cena (#PCDATA)>
+    <!ELEMENT status (#PCDATA)><!ELEMENT data_wplaty (#PCDATA)>
+]>
+<biuro>
+    <uczestnicy>
+        <uczestnik id="U1"><imie>Marek</imie><nazwisko>Zając</nazwisko></uczestnik>
+    </uczestnicy>
+    <wycieczki>
+        <wycieczka id="W1"><kraj>Egipt</kraj><cena>2500</cena></wycieczka>
+    </wycieczki>
+    <rezerwacje>
+        <rezerwacja id="R1" uczestnik_ref="U1" wycieczka_ref="W1">
+            <status>Potwierdzona</status><data_wplaty>2025-01-15</data_wplaty>
+        </rezerwacja>
+    </rezerwacje>
+</biuro>
+
+------ g. Wykładowca - zajęcia (plan.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plan [
+    <!ELEMENT plan (wykladowcy, kursy, zajecia)>
+    <!ELEMENT wykladowcy (wykladowca+)>
+    <!ELEMENT wykladowca (tytul, nazwisko)>
+    <!ATTLIST wykladowca id ID #REQUIRED>
+    <!ELEMENT kursy (kurs+)>
+    <!ELEMENT kurs (nazwa, typ)>
+    <!ATTLIST kurs id ID #REQUIRED>
+    <!ELEMENT zajecia (zajecie+)>
+    <!ELEMENT zajecie (sala, dzien)>
+    <!ATTLIST zajecie id ID #REQUIRED>
+    <!ATTLIST zajecie wykladowca_ref IDREF #REQUIRED>
+    <!ATTLIST zajecie kurs_ref IDREF #REQUIRED>
+    <!ELEMENT tytul (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT nazwa (#PCDATA)><!ELEMENT typ (#PCDATA)>
+    <!ELEMENT sala (#PCDATA)><!ELEMENT dzien (#PCDATA)>
+]>
+<plan>
+    <wykladowcy>
+        <wykladowca id="WY1"><tytul>Dr inż.</tytul><nazwisko>Wikarek</nazwisko></wykladowca>
+    </wykladowcy>
+    <kursy>
+        <kurs id="K1"><nazwa>PAI</nazwa><typ>Laboratorium</typ></kurs>
+    </kursy>
+    <zajecia>
+        <zajecie id="Z1" wykladowca_ref="WY1" kurs_ref="K1"><sala>4.12</sala><dzien>Wtorek</dzien></zajecie>
+    </zajecia>
+</plan>
+
+------ h. Pracownik - stanowisko (firma.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE firma [
+    <!ELEMENT firma (pracownicy, stanowiska, etaty)>
+    <!ELEMENT pracownicy (pracownik+)>
+    <!ELEMENT pracownik (imie, nazwisko, wiek)>
+    <!ATTLIST pracownik id ID #REQUIRED>
+    <!ELEMENT stanowiska (stanowisko+)>
+    <!ELEMENT stanowisko (nazwa, pensja)>
+    <!ATTLIST stanowisko id ID #REQUIRED>
+    <!ELEMENT etaty (etat+)>
+    <!ELEMENT etat (lata_pracy, wymiar)>
+    <!ATTLIST etat id ID #REQUIRED>
+    <!ATTLIST etat pracownik_ref IDREF #REQUIRED>
+    <!ATTLIST etat stanowisko_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)><!ELEMENT wiek (#PCDATA)>
+    <!ELEMENT nazwa (#PCDATA)><!ELEMENT pensja (#PCDATA)>
+    <!ELEMENT lata_pracy (#PCDATA)><!ELEMENT wymiar (#PCDATA)>
+]>
+<firma>
+    <pracownicy>
+        <pracownik id="P1"><imie>Jan</imie><nazwisko>Kowalski</nazwisko><wiek>30</wiek></pracownik>
+    </pracownicy>
+    <stanowiska>
+        <stanowisko id="S1"><nazwa>Informatyk</nazwa><pensja>6000</pensja></stanowisko>
+    </stanowiska>
+    <etaty>
+        <etat id="E1" pracownik_ref="P1" stanowisko_ref="S1"><lata_pracy>5</lata_pracy><wymiar>1/1</wymiar></etat>
+    </etaty>
+</firma>
+
+------ i. Samolot - pasażer (lotnisko.xml) ------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lotnisko [
+    <!ELEMENT lotnisko (pasazerowie, loty, rezerwacje)>
+    <!ELEMENT pasazerowie (pasazer+)>
+    <!ELEMENT pasazer (imie, nazwisko)>
+    <!ATTLIST pasazer id ID #REQUIRED>
+    <!ELEMENT loty (lot+)>
+    <!ELEMENT lot (numer_lotu, cel)>
+    <!ATTLIST lot id ID #REQUIRED>
+    <!ELEMENT rezerwacje (rezerwacja+)>
+    <!ELEMENT rezerwacja (miejsce, klasa)>
+    <!ATTLIST rezerwacja id ID #REQUIRED>
+    <!ATTLIST rezerwacja pasazer_ref IDREF #REQUIRED>
+    <!ATTLIST rezerwacja lot_ref IDREF #REQUIRED>
+    <!ELEMENT imie (#PCDATA)><!ELEMENT nazwisko (#PCDATA)>
+    <!ELEMENT numer_lotu (#PCDATA)><!ELEMENT cel (#PCDATA)>
+    <!ELEMENT miejsce (#PCDATA)><!ELEMENT klasa (#PCDATA)>
+]>
+<lotnisko>
+    <pasazerowie>
+        <pasazer id="P1"><imie>Krzysztof</imie><nazwisko>Ibisz</nazwisko></pasazer>
+    </pasazerowie>
+    <loty>
+        <lot id="L1"><numer_lotu>LOT789</numer_lotu><cel>Warszawa</cel></lot>
+    </loty>
+    <rezerwacje>
+        <rezerwacja id="R1" pasazer_ref="P1" lot_ref="L1"><miejsce>1A</miejsce><klasa>Biznes</klasa></rezerwacja>
+    </rezerwacje>
+</lotnisko>
